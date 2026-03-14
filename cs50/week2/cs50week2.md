@@ -25,3 +25,4 @@ int main(void)
 }
 ```
 Notice that this code loops until the NUL character is found.
+
