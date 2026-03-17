@@ -26,3 +26,95 @@ int main(void)
 ```
 Notice that this code loops until the NUL character is found.
 
+
+
+
+## string.c
+```
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+    string s = get_string("Input:  ");
+    printf("Output ");
+    for (int i = 0; i < strlen(s); i++)
+    {
+        printf("%c", s[i]);
+    }
+    printf("\n");
+}
+```
+This is not good design
+because in the for loop everytime calculate **strlen(s)**
+
+⬇
+
+We can do
+```
+
+int main(void)
+{
+    string s = get_string("Input:  ");
+    printf("Output ");
+    for (int i = 0, n = strlen(s); i < n; i++)
+    {
+        printf("%c", s[i]);
+    }
+    printf("\n");
+}
+
+```
+
+
+## uppercase
+
+```
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+    string s = get_string("Before: ");
+    printf("After:  ");
+    for (int i = 0, n = strlen(s); i < n; i++)
+    {
+        // If s[i] is lowercase
+        if (s[i] >= 'a' && s[i] <= 'z')
+        {
+            printf("%c", s[i] - 32);
+        }
+        //else if not lowercase
+        else
+        {
+            printf("%c", s[i]);
+        }
+    }
+    printf("\n");
+}
+
+```
+Output
+``` 
+$ ./uppercase
+Before: David
+After:  DAVID
+```
+⬇We can just use library
+```
+int main(void)
+{
+    string s = get_string("Before: ");
+    printf("After:  ");
+    for (int i = 0, n = strlen(s); i < n; i++)
+    {
+        printf("%c", toupper(s[i]));
+    }
+    printf("\n");
+}
+```
+
+
+
