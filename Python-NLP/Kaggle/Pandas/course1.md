@@ -53,3 +53,9 @@ wine_reviews = pd.read_csv("../input/wine-reviews/winemag-data-130k-v2.csv", ind
 wine_reviews.head()
 ```
 ![alt text](image-1.png)
+
+
+# Exercise
+https://www.kaggle.com/code/ponta1234/exercise-creating-reading-and-writing/edit
+
+
