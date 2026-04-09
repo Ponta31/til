@@ -146,3 +146,5 @@ Else
 
 - Why the best case is also Ω(n log n)
 - Even if the list is already sorted, merge sort has no way to detect that and stop early. It must split all the way down (log n levels) and must compare elements while merging (n per level). There is no shortcut, so best and worst case cost the same — making it Θ(n log n).
+
+
