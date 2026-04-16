@@ -1,0 +1,36 @@
+---
+title: "Python Learning Notes"
+author: "Daiki Suematsu"
+format: 
+  html:
+    code-fold: true  # This lets you hide/show code blocks in the browser
+jupyter: python3    # Tells Quarto to use Python for the code cells
+---
+
+## The meaning of `*`
+
+1. In a declaration: `*` means 'this variable is a pointer'
+```c
+char *s = "HI!";
+
+```
+- Here `*` is just telling C: "s is a pointer to a char."
+- This `*` is part of the type, not an operation.
+
+2. In an expression - `*` means "go to that address and get the value"
+```c
+printf("%c\n", *s);       // *s = 'H'
+printf("%c\n", *(s + 1)); // *(s+1) = 'I'
+printf("%c\n", *(s + 2)); // *(s+2) = '!'
+```
+- Here `*` is the dereference operator. It's an action.
+- It means: "take the address s+1, go there, and pull out the value."
+
+
+- Using %s (prints a whole string)
+```c
+printf("%s\n", s);      // starts at 'H' → prints "HI!"
+printf("%s\n", s + 1);  // starts at 'I' → prints "I!"
+printf("%s\n", s + 2);  // starts at '!' → prints "!"
+
+```

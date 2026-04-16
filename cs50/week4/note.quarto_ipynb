@@ -1,0 +1,29 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Python Learning Notes\"\n",
+        "author: \"Daiki Suematsu\"\n",
+        "format: \n",
+        "  html:\n",
+        "    code-fold: true  # This lets you hide/show code blocks in the browser\n",
+        "jupyter: python3    # Tells Quarto to use Python for the code cells\n",
+        "---\n"
+      ],
+      "id": "f42ff542"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/daikisuematsu/.local/share/mamba/envs/nlp_env/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

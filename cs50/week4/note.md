@@ -81,3 +81,4 @@ To understand why a string is a char *, you need to know how strings are stored 
 
 char `*s` is a pointer — it stores the memory address of the first character. So `s` holds `0x100`, and C knows the string ends when it hits '\0'.
 `printf("%s", s)` works by starting at that address and printing characters one by one until it finds '\0'.
+
