@@ -16,8 +16,10 @@ char *s = "HI!";
 ```
 - Here `*` is just telling C: "s is a pointer to a char."
 - This `*` is part of the type, not an operation.
+- `the pointer to char called "s", and "s" = address of "HI!"`
 
-2. In an expression - `*` means "go to that address and get the value"
+
+1. In an expression - `*` means "go to that address and get the value"
 ```c
 printf("%c\n", *s);       // *s = 'H'
 printf("%c\n", *(s + 1)); // *(s+1) = 'I'
@@ -34,3 +36,120 @@ printf("%s\n", s + 1);  // starts at 'I' → prints "I!"
 printf("%s\n", s + 2);  // starts at '!' → prints "!"
 
 ```
+
+
+```python
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *x = malloc(3 * sizeof(int));
+    if (x == NULL)
+    {
+        return 1;
+    }
+    x[0] = 72;
+    x[1] = 73;
+    x[2] = 33;
+    free(x);
+    return 0;
+}
+
+```
+↓
+
+```
+$ make memory
+$ valgrind ./memory
+==6965== Memcheck, a memory error detector
+==6965== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==6965== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==6965== Command: ./memory
+==6965== 
+==6965== 
+==6965== HEAP SUMMARY:
+==6965==     in use at exit: 0 bytes in 0 blocks
+==6965==   total heap usage: 1 allocs, 1 frees, 12 bytes allocated
+==6965== 
+==6965== All heap blocks were freed -- no leaks are possible
+==6965== 
+==6965== For lists of detected and suppressed errors, rerun with: -s
+==6965== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+```
+
+- What is `HEAP`?
+- The heap is where memory lives that you ask for explicitly with malloc() — and you are responsible for giving it back with free().
+  Heap is a region of memory used for dynamic memory allocation at runtime.
+
+  - Allocated manually using malloc(), calloc(), realloc()
+  - Must be freed manually with free() to avoid memory leaks
+  - Grows upward in memory (toward higher addresses)
+  - Opposite end: the stack grows downward
+
+  int *p = malloc(sizeof(int));  // allocates on the heap
+  *p = 42;
+  free(p);                        // must free manually
+
+  Stack vs Heap:
+
+  ┌────────────┬────────────────┬─────────────────┐
+  │            │     Stack      │      Heap       │
+  ├────────────┼────────────────┼─────────────────┤
+  │ Allocation │ Automatic      │ Manual (malloc) │
+  ├────────────┼────────────────┼─────────────────┤
+  │ Size       │ Limited        │ Larger          │
+  ├────────────┼────────────────┼─────────────────┤
+  │ Lifetime   │ Function scope │ Until free()    │
+  └────────────┴────────────────┴─────────────────┘
+
+  Forgetting to free() heap memory = memory leak.
+
+
+  
+
+  ## garbage
+
+  ```c
+  #include <stdio.h>
+
+int main(void)
+{
+    int scores[1024];
+    for (int i=0; i<1024; i++)
+    {
+        printf("%i\n", scores[i]);
+    }
+}
+```
+
+
+
+## Pointer Fun with Binky
+
+- We watched a video from Stanford University that helped us visualize and understand pointers.
+
+
+
+## Swapping
+- In the real world, a common need in programming is to swap two values. Naturally, it’s hard to swap two variables without a temporary holding space. In practice, you can type code swap.c and write code as follows to see this in action:
+
+
+### Review char *x = Hi!
+It means "the address of character, that is called a pointer x."
+
+
+*Scopes*
+--------------
+'Machine code'
+-------------
+'globals'
+------------
+Heap(used for malloc)
+↓
+
+
+↑
+Stack (Used for valiables, functions)
+-------------
+

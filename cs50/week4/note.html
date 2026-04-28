@@ -117,8 +117,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Here <code>*</code> is just telling C: “s is a pointer to a char.”</li>
 <li>This <code>*</code> is part of the type, not an operation.</li>
+<li><code>the pointer to char called "s", and "s" = address of "HI!"</code></li>
 </ul>
-<ol start="2" type="1">
+<ol type="1">
 <li>In an expression - <code>*</code> means “go to that address and get the value”</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%c\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>s<span class="op">);</span>       <span class="co">// *s = 'H'</span></span>
@@ -132,6 +133,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> s<span class="op">);</span>      <span class="co">// starts at 'H' → prints "HI!"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> s <span class="op">+</span> <span class="dv">1</span><span class="op">);</span>  <span class="co">// starts at 'I' → prints "I!"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> s <span class="op">+</span> <span class="dv">2</span><span class="op">);</span>  <span class="co">// starts at '!' → prints "!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#include &lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#include &lt;stdlib.h&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span> main(void)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">int</span> <span class="op">*</span>x <span class="op">=</span> malloc(<span class="dv">3</span> <span class="op">*</span> sizeof(<span class="bu">int</span>))<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x <span class="op">==</span> NULL)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    x[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">72</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    x[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">73</span><span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    x[<span class="dv">2</span>] <span class="op">=</span> <span class="dv">33</span><span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    free(x)<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>↓</p>
+<pre><code>$ make memory
+$ valgrind ./memory
+==6965== Memcheck, a memory error detector
+==6965== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==6965== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==6965== Command: ./memory
+==6965== 
+==6965== 
+==6965== HEAP SUMMARY:
+==6965==     in use at exit: 0 bytes in 0 blocks
+==6965==   total heap usage: 1 allocs, 1 frees, 12 bytes allocated
+==6965== 
+==6965== All heap blocks were freed -- no leaks are possible
+==6965== 
+==6965== For lists of detected and suppressed errors, rerun with: -s
+==6965== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</code></pre>
+<ul>
+<li><p>What is <code>HEAP</code>?</p></li>
+<li><p>The heap is where memory lives that you ask for explicitly with malloc() — and you are responsible for giving it back with free(). Heap is a region of memory used for dynamic memory allocation at runtime.</p>
+<ul>
+<li>Allocated manually using malloc(), calloc(), realloc()</li>
+<li>Must be freed manually with free() to avoid memory leaks</li>
+<li>Grows upward in memory (toward higher addresses)</li>
+<li>Opposite end: the stack grows downward</li>
+</ul>
+<p>int <em>p = malloc(sizeof(int)); // allocates on the heap </em>p = 42; free(p); // must free manually</p>
+<p>Stack vs Heap:</p>
+<p>┌────────────┬────────────────┬─────────────────┐ │ │ Stack │ Heap │ ├────────────┼────────────────┼─────────────────┤ │ Allocation │ Automatic │ Manual (malloc) │ ├────────────┼────────────────┼─────────────────┤ │ Size │ Limited │ Larger │ ├────────────┼────────────────┼─────────────────┤ │ Lifetime │ Function scope │ Until free() │ └────────────┴────────────────┴─────────────────┘</p>
+<p>Forgetting to free() heap memory = memory leak.</p></li>
+</ul>
 </section>
 
 </main>
